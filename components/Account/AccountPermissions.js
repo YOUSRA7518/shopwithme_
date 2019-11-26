@@ -25,17 +25,17 @@ function AccountPermissions() {
     <div style={{ margin: "2em 0" }}>
       <Header as="h2">
         <Icon name="settings" />
-        User Permissions
+        Autorisations utilisateur
       </Header>
       <Table compact celled definition>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell />
-            <Table.HeaderCell>Name</Table.HeaderCell>
+            <Table.HeaderCell>Nom</Table.HeaderCell>
             <Table.HeaderCell>Email</Table.HeaderCell>
-            <Table.HeaderCell>Joined</Table.HeaderCell>
-            <Table.HeaderCell>Updated</Table.HeaderCell>
-            <Table.HeaderCell>Role</Table.HeaderCell>
+            <Table.HeaderCell>Nous à rejoins</Table.HeaderCell>
+            <Table.HeaderCell>Mis à jour</Table.HeaderCell>
+            <Table.HeaderCell>Rôle</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>

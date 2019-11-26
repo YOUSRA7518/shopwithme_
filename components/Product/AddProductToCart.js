@@ -41,21 +41,21 @@ function AddProductToCart({ user, productId }) {
     <Input
       type="number"
       min="1"
-      placeholder="Quantity"
+      placeholder="Quantité"
       value={quantity}
       onChange={event => setQuantity(Number(event.target.value))}
       action={
         user && success
           ? {
-              color: "blue",
-              content: "Item Added",
+              color: "green",
+              content: "Article ajouté",
               icon: "plus cart",
               disabled: true
             }
           : user
           ? {
               color: "red",
-              content: "Add to Cart",
+              content: "Ajouter au panier",
               icon: "plus cart",
               loading,
               disabled: loading,
@@ -63,7 +63,7 @@ function AddProductToCart({ user, productId }) {
             }
           : {
               color: "blue",
-              content: "Sign Up To Purcharse",
+              content: "Inscrivez vous ",
               icon: "signup",
               onClick: () => router.push("/signup")
             }

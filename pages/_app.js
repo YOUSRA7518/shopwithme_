@@ -29,7 +29,7 @@ class MyApp extends App {
         const user = response.data;
         const isRoot = user.role === "root";
         const isAdmin = user.role === "admin";
-        // if authenticated , but not of role 'admin' or 'root', redirect from '/create' page
+        // si authentifié, mais n'a pas le rôle 'admin' ou 'root', redirige de la page '/ create'
         const isNotPermitted =
           !(isRoot || isAdmin) && ctx.pathname === "/create";
         if (isNotPermitted) {
@@ -37,10 +37,13 @@ class MyApp extends App {
         }
         pageProps.user = user;
       } catch (error) {
-        console.error("Error getting current user", error);
-        // 1) Throw out invalid token
+        console.error(
+          "Erreur lors de l'obtention de l'utilisateur actuel",
+          error
+        );
+        // 1) Jetez le token invalide
         destroyCookie(ctx, "token");
-        //2) Redirect to login
+        //2) Rediriger vous pour vous connecter
         redirectUser(ctx, "/login");
       }
     }

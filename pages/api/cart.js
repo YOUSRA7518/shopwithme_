@@ -26,7 +26,7 @@ export default async (req, res) => {
 
 async function handleGetRequest(req, res) {
   if (!("authorization" in req.headers)) {
-    return res.status(401).send("No authorization token");
+    return res.status(401).send("Pas de token autoriser");
   }
   try {
     const { userId } = jwt.verify(
@@ -40,51 +40,51 @@ async function handleGetRequest(req, res) {
     res.status(200).json(cart.products);
   } catch (error) {
     console.error(error);
-    return res.status(403).send("Please login again");
+    return res.status(403).send("Veuillez vous reconnecter");
   }
 }
 
 async function handlePutRequest(req, res) {
   const { quantity, productId } = req.body;
   if (!("authorization" in req.headers)) {
-    return res.status(401).send("No authorization token");
+    return res.status(401).send("Pas de token autoriser");
   }
   try {
     const { userId } = jwt.verify(
       req.headers.authorization,
       process.env.JWT_SECRET
     );
-    // Get user cart based on userId
+    // Obtenir le panier de l'utilisateur basé sur userId
     const cart = await Cart.findOne({ user: userId });
-    // Check if product already exists in cart
+    // Vérifier si le produit existe déjà dans le panier
     const productExists = cart.products.some(doc =>
       ObjectId(productId).equals(doc.product)
     );
-    // If so, increment quantity (by number provided to request)
+    // Si oui, incrémenter la quantité (par le nombre fourni à la demande)
     if (productExists) {
       await Cart.findOneAndUpdate(
         { _id: cart._id, "products.product": productId },
         { $inc: { "products.$.quantity": quantity } }
       );
     } else {
-      // If not, add new product with given quantity
+      // Si non, ajouter un nouveau produit avec la quantité donnée
       const newProduct = { quantity, product: productId };
       await Cart.findOneAndUpdate(
         { _id: cart._id },
         { $addToSet: { products: newProduct } }
       );
     }
-    res.status(200).send("Cart updated");
+    res.status(200).send("Mis à jour du panier");
   } catch (error) {
     console.error(error);
-    return res.status(403).send("Please login again");
+    return res.status(403).send("Veuillez vous reconnecter");
   }
 }
 
 async function handleDeleteRequest(req, res) {
   const { productId } = req.query;
   if (!("authorization" in req.headers)) {
-    return res.status(401).send("No authorization token");
+    return res.status(401).send("Pas de token autoriser");
   }
   try {
     const { userId } = jwt.verify(
@@ -102,6 +102,6 @@ async function handleDeleteRequest(req, res) {
     res.status(200).json(cart.products);
   } catch (error) {
     console.error(error);
-    return res.status(403).send("Please login again");
+    return res.status(403).send("Veuillez vous reconnecter");
   }
 }

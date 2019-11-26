@@ -46,20 +46,20 @@ function Signup() {
       <Message
         attached
         icon="settings"
-        header="Get Started!"
-        content="Create a new account"
+        header="Commencer!"
+        content="Créer un nouveau compte"
         color="green"
       />
       <Form error={Boolean(error)} loading={loading} onSubmit={handleSubmit}>
-        <Message content={error.response} error header="Oops!" />
+        <Message content={error} error header="Oops!" />
 
         <Segment>
           <Form.Input
             fluid
             icon="user"
             iconPosition="left"
-            label="Name"
-            placholder="Name"
+            label="Nom"
+            placholder="Nom"
             name="name"
             value={user.name}
             onChange={handleChange}
@@ -79,8 +79,8 @@ function Signup() {
             fluid
             icon="lock"
             iconPosition="left"
-            label="Password"
-            placholder="Password"
+            label="Mot de Passe"
+            placholder="Mot de Passe"
             name="password"
             type="password"
             value={user.password}
@@ -91,17 +91,16 @@ function Signup() {
             icon="signup"
             type="submit"
             color="red"
-            content="signup"
+            content="Enregistrer"
           />
         </Segment>
       </Form>
       <Message attached="bottom" warning>
         <Icon name="help" />
-        Existing user ?
+        Utilisateur existant ?
         <Link href="/login">
-          <a>Log in here </a>
+          <a> Connectez-vous ici </a>
         </Link>{" "}
-        instead.
       </Message>
     </>
   );

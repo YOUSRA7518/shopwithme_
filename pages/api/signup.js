@@ -11,38 +11,48 @@ connectDb();
 export default async (req, res) => {
   const { name, email, password } = req.body;
   try {
-    // 1) Validate name / email / password
+    // 1) Valider nom / email / mot de passe
     if (!isLength(name, { min: 3, max: 10 })) {
-      return res.status(422).send("Name must be 3-10 characters long");
+      return res
+        .status(422)
+        .send("Le nom doit comporter entre 3 et 10 caractères.");
     } else if (!isLength(password, { min: 6 })) {
-      return res.status(422).send("Password must be at least 6 characters");
+      return res
+        .status(422)
+        .send("Le mot de passe doit être au moins de 6 caractères");
     } else if (!isEmail(email)) {
-      return res.status(422).send("Email must be valid");
+      return res.status(422).send("L'email doit être valide");
     }
-    // 2) Check to see if the user already exists in the db
+    // 2) Vérifier si l'utilisateur existe déjà dans la base de données
     const user = await User.findOne({ email });
     if (user) {
-      return res.status(422).send(`User already exists with email ${email}`);
+      return res
+        .status(422)
+        .send(`L'utilisateur existe déjà avec email ${email}`);
     }
-    // 3) --if not, hash their password
+    // 3) si non, crypter leur mot de passe
     const hash = await bcrypt.hash(password, 10);
-    // 4) create user
+    // 4) Créer un utilisateur
     const newUser = await new User({
       name,
       email,
       password: hash
     }).save();
     console.log({ newUser });
-    // 5) create cart for new user
+    // 5) créer un panier pour un nouvel utilisateur
     await new Cart({ user: newUser._id }).save();
-    // 6) create token for the new user
+    // 6) créer un token pour le nouvel utilisateur
     const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, {
       expiresIn: "7d"
     });
-    // 7) send back token
+    // 7) renvoyer le  token
     res.status(201).json(token);
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error signing up user. Please try again later");
+    res
+      .status(500)
+      .send(
+        "Erreur lors de l'inscription de l'utilisateur. Veuillez réessayer plus tard"
+      );
   }
 };

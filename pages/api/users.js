@@ -13,6 +13,6 @@ export default async (req, res) => {
     res.status(200).json(users);
   } catch (error) {
     console.error(error);
-    res.status(403).send("Please login again");
+    res.status(403).send("Veuillez vous reconnecter");
   }
 };

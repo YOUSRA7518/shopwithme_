@@ -19,28 +19,28 @@ function ProductAttributes({ description, _id, user }) {
   }
   return (
     <>
-      <Header as="h3"> About this product </Header>
+      <Header as="h3"> Idées Tenue </Header>
       <p>{description}</p>
       {isRootOrAdmin && (
         <>
           <Button
             icon="trash alternate outline"
             color="red"
-            content="Delete Product "
+            content="Supprimer le produitt "
             onClick={() => setModal(true)}
           ></Button>
           <Modal open={modal} dimmer="blurring">
-            <Modal.Header>Confirm Delete</Modal.Header>
+            <Modal.Header>Confirmation de la suppression</Modal.Header>
             <Modal.Content>
-              <p>Are you sure you want to delete this product </p>
+              <p>Êtes-vous sûr de vouloir supprimer ce produit? </p>
             </Modal.Content>
             <Modal.Actions>
-              <Button onClick={() => setModal(false)} content="Cancel" />
+              <Button onClick={() => setModal(false)} content="Annuler" />
               <Button
                 negative
                 icon="trash"
                 labelPosition="right"
-                content="Delete"
+                content="Supprimer"
                 onClick={handleDelete}
               />
             </Modal.Actions>

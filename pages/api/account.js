@@ -20,7 +20,7 @@ export default async (req, res) => {
 
 async function handleGetRequest(req, res) {
   if (!("authorization" in req.headers)) {
-    return res.status(401).send("No authorization token");
+    return res.status(401).send("Pas de token autoriser");
   }
 
   try {
@@ -32,15 +32,15 @@ async function handleGetRequest(req, res) {
     if (user) {
       res.status(200).json(user);
     } else {
-      res.status(404).send("User not found");
+      res.status(404).send("Utilisateur non trouvé");
     }
   } catch (error) {
-    res.status(403).send("Invalid token");
+    res.status(403).send("Token invalide");
   }
 }
 
 async function handlePutRequest(req, res) {
   const { _id, role } = req.body;
   await User.findOneAndUpdate({ _id }, { role });
-  res.status(203).send("User updated");
+  res.status(203).send("Mis à jour de l'utiliisateur");
 }

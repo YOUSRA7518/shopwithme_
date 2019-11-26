@@ -16,10 +16,10 @@ Home.getInitialProps = async ctx => {
   const size = 9;
   const url = `${baseUrl}/api/products`;
   const payload = { params: { page, size } };
-  // fetch data on server
+  // récupérer les données sur le serveur
   const response = await axios.get(url, payload);
-  // return response data as an object
+  // renvoyer les données de réponse sous forme d'objet
   return response.data;
-  // note : this object will be merged with existing props
+  // note: cet objet sera fusionné avec les accessoires existants
 };
 export default Home;

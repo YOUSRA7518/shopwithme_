@@ -1,4 +1,4 @@
-// must restart server whenever you make changes in next.config
+// doit redémarrer le serveur chaque fois que vous apportez des modifications dans next.config
 module.exports = {
   env: {
     MONGO_SRV:

@@ -24,7 +24,7 @@ function CartItemList({ products, user, handleRemoveFromCart, success }) {
         </Item.Header>
       ),
       image: p.product && p.product.mediaUrl,
-      meta: `${p.quantity} x $${p.product && p.product.price}`,
+      meta: `${p.quantity} x ${p.product && p.product.price}€`,
       fluid: "true",
       extra: (
         <Button
@@ -41,8 +41,8 @@ function CartItemList({ products, user, handleRemoveFromCart, success }) {
     return (
       <Message
         success
-        header="Success!"
-        content="Your order and payment has been accepted"
+        header="Valider!"
+        content="Votre commande et votre paiement ont été acceptés"
         icon="star outline"
       />
     );
@@ -50,19 +50,19 @@ function CartItemList({ products, user, handleRemoveFromCart, success }) {
 
   if (products.length === 0) {
     return (
-      <Segment secondary color="teal" inverted textAlign="center" placeholder>
+      <Segment secondary color="red" inverted textAlign="center" placeholder>
         <Header icon>
           <Icon name="shopping basket" />
-          No products in your cart. Add some!
+          Aucun produit dans votre panier. Ajoutez-en!
         </Header>
         <div>
           {user ? (
-            <Button color="orange" onClick={() => router.push("/")}>
-              View Products
+            <Button color="grey" onClick={() => router.push("/")}>
+              Voir les produits
             </Button>
           ) : (
-            <Button color="blue" onClick={() => router.push("/login")}>
-              Login to Add Products
+            <Button color="grey" onClick={() => router.push("/login")}>
+              Connectez-vous pour ajouter des produits
             </Button>
           )}
         </div>

@@ -6,7 +6,7 @@ connectDb();
 
 export default async (req, res) => {
   const { page, size } = req.query;
-  // Convert querystring values to numbers
+  // Conversion des valeurs de chaînes de requête en nombres
   const pageNum = Number(page);
   const pageSize = Number(size);
   let products = [];

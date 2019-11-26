@@ -31,7 +31,7 @@ async function handlePostRequest(req, res) {
   const { name, price, description, mediaUrl } = req.body;
   try {
     if (!name || !price || !description || !mediaUrl) {
-      return res.status(422).send("Product missing one or more fields");
+      return res.status(422).send("Produit manquant un ou plusieurs champs");
     }
     const product = await new Product({
       name,
@@ -42,16 +42,16 @@ async function handlePostRequest(req, res) {
     res.status(201).json(product);
   } catch (error) {
     console.error(error);
-    res.status(500).send("Server error in creating product");
+    res.status(500).send("Erreur du serveur lors de la création du produit");
   }
 }
 
 async function handleDeleteRequest(req, res) {
   const { _id } = req.query;
   try {
-    // 1) Delete product by id
+    // 1) Supprimer le produit par identifiant
     await Product.findOneAndDelete({ _id });
-    // 2) Remove product from all carts, referenced as 'product'
+    // 2) Retirer le produit de tous les paniers, référencé comme «produit»
     await Cart.updateMany(
       { "products.product": _id },
       { $pull: { products: { product: _id } } }
@@ -59,6 +59,6 @@ async function handleDeleteRequest(req, res) {
     res.status(204).json({});
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error deleting product");
+    res.status(500).send("Erreur lors de la suppression du produit");
   }
 }
