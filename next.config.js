@@ -1,7 +1,7 @@
 // doit redémarrer le serveur chaque fois que vous apportez des modifications dans next.config
 module.exports = {
   env: {
-    ENV: production,
+    ENV: "production",
     MONGO_SRV:
       "mongodb+srv://ShopWithMe:2904Yousra@shopwithme-3owhm.mongodb.net/test?retryWrites=true&w=majority",
     JWT_SECRET: "2904Yousra",
