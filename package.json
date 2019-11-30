@@ -8,6 +8,9 @@
     "start": "next start",
     "build": "next build"
   },
+  "engines": {
+    "node": "11.3.0"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
