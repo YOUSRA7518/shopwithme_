@@ -11,7 +11,7 @@ async function connectDb() {
   let mongoUrl;
 
   if (process.env.ENV === "production") {
-    mongoUrl = process.env.MONGO_LAB;
+    mongoUrl = process.env.MONGO_SRV;
   } else {
     mongoUrl = process.env.MONGO_SRV;
   }
