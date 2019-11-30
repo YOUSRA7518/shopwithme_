@@ -7,8 +7,17 @@ async function connectDb() {
     console.log("Utiliser la connexion existante");
     return;
   }
+
+  let mongoUrl;
+
+  if (process.env.ENV === "production") {
+    mongoUrl = process.env.MONGO_SRV;
+  } else {
+    mongoUrl = process.env.MONGO_LAB;
+  }
+
   // Utiliser une nouvelle connexion à la base de données
-  const db = await mongoose.connect(process.env.MONGO_SRV, {
+  const db = await mongoose.connect(mongoUrl, {
     useCreateIndex: true,
     useFindAndModify: false,
     useNewUrlParser: true,
